@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>檔案列表</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+</head>
+<body>
+    <header>
+        <h1>已上傳檔案列表</h1>
+    </header>
+
+    <table>
+        <thead>
+            <tr>
+                <th>檔案名稱</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for file in files %}
+            <tr>
+                <td>{{ file.name }}</td>
+                <td>
+                    <a href="{{ file.url }}">下載</a> |
+                    <form action="{% url 'delete_file' file.id %}" method="POST" style="display:inline;">
+                        {% csrf_token %}
+                        <button type="submit">刪除</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <p class="centered-text">
+        <a href="{% url 'upload' %}">上傳新檔案</a>
+    </p>
+    
+    <footer>
+        <p>&copy; 2024 Cloud Application</p>
+    </footer>
+</body>
+</html>

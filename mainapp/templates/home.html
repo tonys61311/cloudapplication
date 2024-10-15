@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cloud Application</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+</head>
+<body>
+    <header>
+        <h1>歡迎使用 Cloud Drive</h1>
+    </header>
+
+    <nav>
+        <ul>
+            {% if user.is_authenticated %}
+                <li><a href="{% url 'upload' %}">上傳檔案</a></li>
+                <li><a href="{% url 'file_list' %}">檢視與管理檔案</a></li>
+            {% else %}
+                <li><a href="{% url 'login' %}">登入</a></li>
+                <li><a href="{% url 'register' %}">註冊</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+
+    <footer>
+        <p>&copy; 2024 Cloud Application</p>
+    </footer>
+</body>
+</html>

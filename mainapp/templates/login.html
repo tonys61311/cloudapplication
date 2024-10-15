@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登入</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+</head>
+<body>
+    <header>
+        <h1>登入帳號</h1>
+    </header>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">登入</button>
+    </form>
+
+    <p class="centered-text">還沒有帳號？ <a href="{% url 'register' %}">註冊</a></p>
+
+    <footer>
+        <p>&copy; 2024 Cloud Application</p>
+    </footer>
+</body>
+</html>

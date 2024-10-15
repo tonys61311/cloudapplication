@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>上傳檔案</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+</head>
+<body>
+    <header>
+        <h1>上傳檔案</h1>
+    </header>
+
+    <form action="{% url 'upload' %}" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <label for="file">選擇檔案 (JPG, PDF, TXT):</label>
+        <input type="file" name="file" accept=".jpg,.jpeg,.pdf,.txt" required>
+        <button type="submit">上傳</button>
+    </form>
+
+    <p class="centered-text">
+        <a href="{% url 'file_list' %}">返回檔案列表</a>
+    </p>
+
+    <footer>
+        <p>&copy; 2024 Cloud Application</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,15 @@
+# 忽略虛擬環境
+venv/
+env/
+
+# 忽略資料庫文件
+*.sqlite3
+
+# 忽略 Pycache
+__pycache__/
+*.pyc
+
+# 忽略本地配置
+.DS_Store
+.idea/
+.vscode/
