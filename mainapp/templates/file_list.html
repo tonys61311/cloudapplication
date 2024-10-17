@@ -3,32 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>檔案列表</title>
+    <title>File List</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'styles.css' %}">
 </head>
 <body>
-    <header>
-        <h1>已上傳檔案列表</h1>
-    </header>
+    {% include 'header.html' with title="Uploaded Files List" %}
 
     <table>
         <thead>
             <tr>
-                <th>檔案名稱</th>
-                <th>操作</th>
+                <th>File Name</th>
+                <th>Upload Date</th>
+                <th>Size</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
             {% for file in files %}
             <tr>
                 <td>{{ file.name }}</td>
+                <td>{{ file.LastModified|date:"Y-m-d" }}</td>
+                <td>{{ file.size_display }}</td>
                 <td>
-                    <a href="{{ file.url }}">下載</a> |
-                    <form action="{% url 'delete_file' file.id %}" method="POST" style="display:inline;">
+                    {% comment %} <form action="{{ file.url }}" method="GET">
+                        <button type="submit" class="link-button">Download</button>
+                    </form> | {% endcomment %}
+                    <form action="{% url 'delete_file' file.name|urlencode %}" method="POST" class="no-border-form">
                         {% csrf_token %}
-                        <button type="submit">刪除</button>
-                    </form>
+                        <button type="submit">Delete</button>
+                    </form>                                                     
                 </td>
             </tr>
             {% endfor %}
@@ -36,11 +40,7 @@
     </table>
 
     <p class="centered-text">
-        <a href="{% url 'upload' %}">上傳新檔案</a>
+        <a href="{% url 'upload' %}">Upload New File</a>
     </p>
-    
-    <footer>
-        <p>&copy; 2024 Cloud Application</p>
-    </footer>
 </body>
 </html>

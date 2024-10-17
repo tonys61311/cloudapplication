@@ -1,10 +1,12 @@
 /* 通用設定 */
 body {
+    height: 100%;
     font-family: Arial, sans-serif;
     background-color: #f9f9f9;
     margin: 0;
     padding: 0;
     color: #333;
+    overflow-y: auto;
 }
 
 header {
@@ -21,7 +23,7 @@ header h1 {
 
 nav {
     background-color: #333;
-    padding: 0.5em 0;
+    padding: 20px 0;
 }
 
 nav ul {
@@ -154,4 +156,86 @@ a.button:hover {
     text-align: center;
     margin-top: 20px;  /* 控制與表單的間距 */
     color: #333;  /* 可以更改文字顏色 */
+}
+
+.header-content {
+    display: flex;
+    justify-content: center;  /* 標題居左，按鈕居右 */
+    align-items: center;             /* 垂直居中 */
+    background-color: #4CAF50;
+    color: white;
+    position: relative;
+}
+
+h1 {
+    margin: 0;
+    flex-grow: 1;  /* 標題佔據剩餘空間，讓按鈕固定在右側 */
+    text-align: center;  /* 標題在可用空間內居中 */
+}
+
+.logout-form {
+    margin: 0;  /* 移除表單的外邊距 */
+    padding: 0; /* 移除表單內邊距 */
+    background-color: transparent; /* 移除表單的背景色 */
+}
+
+.logout-button {
+    background-color: #e0e0e0;  /* 灰色背景 */
+    color: #333;                /* 深灰色文字 */
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    margin: 0;                  /* 確保按鈕沒有外邊距 */
+    box-shadow: none;            /* 移除可能的陰影 */
+    position: absolute;           /* 使用絕對定位 */
+    top: 0px;
+    right: 20px;  
+    width: 100px;                /* 固定寬度 */     
+}
+
+.logout-button:hover {
+    background-color: #bdbdbd;  /* 深灰色背景 */
+}
+
+.profile-container {
+    margin: 40px auto;
+    padding: 20px;
+    max-width: 600px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.profile-container h2 {
+    margin-bottom: 20px;
+}
+
+.profile-container p {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.back-home-button {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+}
+
+.back-home-button:hover {
+    background-color: #45a049;
+}
+
+/* 移除 form 的白色 padding 和邊框 */
+.no-border-form {
+    padding: 0;
+    margin: 0;
+    border: none; /* 移除邊框 */
+    background-color: transparent; /* 背景設為透明，移除背景色 */
 }

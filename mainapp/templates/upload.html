@@ -3,24 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>上傳檔案</title>
+    <title>Upload File</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'styles.css' %}">
 </head>
 <body>
-    <header>
-        <h1>上傳檔案</h1>
-    </header>
+    {% include 'header.html' with title="Upload File" %}
 
     <form action="{% url 'upload' %}" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
-        <label for="file">選擇檔案 (JPG, PDF, TXT):</label>
-        <input type="file" name="file" accept=".jpg,.jpeg,.pdf,.txt" required>
-        <button type="submit">上傳</button>
+        <label for="file">Choose a file (JPG, PDF, TXT):</label>
+        <input type="file" name="document" id="document" accept=".png,.jpg,.jpeg,.pdf,.txt" required>
+        <button type="submit">Upload</button>
     </form>
 
     <p class="centered-text">
-        <a href="{% url 'file_list' %}">返回檔案列表</a>
+        <a href="{% url 'file_list' %}">Return to File List</a>
     </p>
 
     <footer>

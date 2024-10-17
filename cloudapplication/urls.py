@@ -24,8 +24,10 @@ urlpatterns = [
     path('', views.home, name='home'),  # 首頁
     path('upload/', views.upload, name='upload'),  # 上傳檔案
     path('files/', views.file_list, name='file_list'),  # 檔案列表
+    path('delete/<str:file_name>/', views.delete_file, name='delete_file'),  # 刪除文件
     # path('login/', views.login_view, name='login'),  # 登入
     path('register/', views.register, name='register'),  # 註冊
     path('login/', auth_views.LoginView.as_view(template_name = 'login.html'), name='login'),
-    path('logout/', auth_views.LogoutView.as_view(), name='logout'),
+    path('logout/', auth_views.LogoutView.as_view(template_name = 'home'), name='logout'),
+    path('profile/', views.profile, name='profile'),
 ]

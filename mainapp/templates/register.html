@@ -3,33 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>註冊</title>
+    <title>Register</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'styles.css' %}">
 </head>
 <body>
     <header>
-        <h1>註冊帳號</h1>
+        <h1>Register an Account</h1>
     </header>
 
-    <form action="{% url 'register' %}" method="POST">
+    <form method="post">
         {% csrf_token %}
-        <label for="username">使用者名稱：</label>
-        <input type="text" name="username" required>
-
-        <label for="email">電子郵件：</label>
-        <input type="email" name="email" required>
-
-        <label for="password">密碼：</label>
-        <input type="password" name="password" required>
-
-        <button type="submit">註冊</button>
+        {{ form.as_p }}
+        <button type="submit">Register</button>
     </form>
 
-    <p class="centered-text">已經有帳號？ <a href="{% url 'login' %}">登入</a></p>
-
-    <footer>
-        <p>&copy; 2024 Cloud Application</p>
-    </footer>
+    <p class="centered-text">Already have an account? <a href="{% url 'login' %}">Login</a></p>
+    
 </body>
 </html>

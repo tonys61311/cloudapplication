@@ -133,3 +133,17 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 
+# AWS S3 settings
+AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY_ID')  # 來自 IAM 使用者
+AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_ACCESS_KEY')  # 來自 IAM 使用者
+AWS_STORAGE_BUCKET_NAME = 'cis5517-cloud-storage'  # 剛創建的 S3 存儲桶名稱
+AWS_S3_REGION_NAME = 'us-east-2'  # 你創建 S3 存儲桶時選擇的地區
+AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
+
+# 確保 S3 文件名不被覆蓋
+# AWS_S3_FILE_OVERWRITE = False
+# AWS_DEFAULT_ACL = None
+# AWS_QUERYSTRING_AUTH = False
+
+# 使用 S3 來存儲媒體文件
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
