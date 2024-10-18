@@ -1,4 +1,3 @@
-from django.shortcuts import render
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
@@ -9,11 +8,13 @@ import boto3
 from botocore.exceptions import ClientError
 from django.http import HttpResponse
 import os
+
 # 首頁
 def home(request):
     return render(request, 'home.html')
 
 # 上傳檔案的視圖函數
+@login_required  # 確保只有登入的使用者才能上傳文件
 def upload(request):
     if request.method == 'POST':
         form = DocumentUploadForm(request.POST, request.FILES)
@@ -22,21 +23,32 @@ def upload(request):
             document = form.cleaned_data['document']
             s3 = boto3.client('s3')
 
-            # 定義文件存儲到 S3 的目錄和文件名
-            file_path = f'documents/{document.name}'
-            s3.upload_fileobj(document, settings.AWS_STORAGE_BUCKET_NAME, file_path)
+            # 使用者的 username 作為文件目錄
+            user_directory = request.user.username
+            file_path = f'{user_directory}/{document.name}'  # 基於 username 儲存文件
+
+            # 將文件上傳到 S3
+            try:
+                s3.upload_fileobj(document, settings.AWS_STORAGE_BUCKET_NAME, file_path)
+            except ClientError as e:
+                print(f"Error uploading file: {e}")
+                return HttpResponse("Error uploading file.", status=500)
 
             return redirect('file_list')  # 文件上傳後重定向到文件列表頁面
     else:
         form = DocumentUploadForm()
-    return render(request, 'upload.html')
+    return render(request, 'upload.html', {'form': form})
 
 # 檔案列表的視圖函數
+@login_required  # 確保只有登入的使用者才能查看文件列表
 def file_list(request):
     s3 = boto3.client('s3')
     bucket_name = settings.AWS_STORAGE_BUCKET_NAME
+    user_directory = request.user.username  # 使用者的 username 作為文件目錄
+
     try:
-        response = s3.list_objects_v2(Bucket=bucket_name, Prefix='documents/')
+        # 僅列出該使用者目錄下的文件
+        response = s3.list_objects_v2(Bucket=bucket_name, Prefix=f'{user_directory}/')
         files = response.get('Contents', [])
         print(files)
         for file in files:
@@ -55,14 +67,16 @@ def file_list(request):
     return render(request, 'file_list.html', {'files': files})
 
 # delete_file
+@login_required  # 確保只有登入的使用者才能刪除文件
 def delete_file(request, file_name):
     s3 = boto3.client('s3')
     bucket_name = settings.AWS_STORAGE_BUCKET_NAME
+    user_directory = request.user.username  # 使用者的 username 作為文件目錄
 
     if request.method == 'POST':
         try:
-            # 將 file_name 加上 'documents/' 路徑
-            file_key = f'documents/{file_name}'
+            # 將 file_name 加上使用者的目錄路徑
+            file_key = f'{user_directory}/{file_name}'
             s3.delete_object(Bucket=bucket_name, Key=file_key)
             return redirect('file_list')
         except ClientError as e:
