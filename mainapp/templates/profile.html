@@ -8,17 +8,7 @@
     <link rel="stylesheet" href="{% static 'styles.css' %}">
 </head>
 <body>
-    <header>
-        <div class="header-content">
-            <h1>User Profile</h1>
-            {% if user.is_authenticated %}
-                <form action="{% url 'logout' %}" method="POST" class="logout-form">
-                    {% csrf_token %}
-                    <button type="submit" class="logout-button">Logout</button>
-                </form>
-            {% endif %}
-        </div>
-    </header>
+    {% include 'header.html' with title="Uploaded Files List" %}
 
     <div class="profile-container">
         <h2>Welcome, {{ user.username }}</h2>

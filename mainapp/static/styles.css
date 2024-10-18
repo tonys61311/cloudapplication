@@ -179,7 +179,7 @@ h1 {
     background-color: transparent; /* 移除表單的背景色 */
 }
 
-.logout-button {
+.logout-button, .home-button {
     background-color: #e0e0e0;  /* 灰色背景 */
     color: #333;                /* 深灰色文字 */
     padding: 10px 20px;
@@ -190,13 +190,25 @@ h1 {
     margin: 0;                  /* 確保按鈕沒有外邊距 */
     box-shadow: none;            /* 移除可能的陰影 */
     position: absolute;           /* 使用絕對定位 */
-    top: 0px;
-    right: 20px;  
-    width: 100px;                /* 固定寬度 */     
+    top: 0px;   
 }
 
-.logout-button:hover {
+.logout-button {
+    right: 20px;  
+    width: 100px; 
+}
+
+.home-button {
+    right: 140px;
+    width: 60px;
+}
+
+.logout-button:hover, .home-button:hover {
     background-color: #bdbdbd;  /* 深灰色背景 */
+}
+
+.home-button:hover {
+    text-decoration: none;  /* 移除底線 */
 }
 
 .profile-container {

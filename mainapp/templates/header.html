@@ -2,6 +2,7 @@
     <div class="header-content">
         <h1>{{ title }}</h1>
         {% if user.is_authenticated %}
+            <a href="{% url 'home' %}" class="home-button">Home</a>
             <form action="{% url 'logout' %}" method="POST" class="logout-form">
                 {% csrf_token %}
                 <button type="submit" class="logout-button">Logout</button>
