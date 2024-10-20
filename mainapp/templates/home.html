@@ -10,18 +10,18 @@
 <body>
     {% include 'header.html' with title="Welcome to Cloud Drive" %}
 
-    <nav>
-        <ul>
+    <div class="home-container">
+        <div class="button-container">
             {% if user.is_authenticated %}
-                <li><a href="{% url 'upload' %}">Upload File</a></li>
-                <li><a href="{% url 'file_list' %}">View and Manage Files</a></li>
-                <li><a href="{% url 'profile' %}">View Profile</a></li> <!-- 新增Profile按鈕 -->
+                <a href="{% url 'upload' %}" class="button">Upload File</a>
+                <a href="{% url 'file_list' %}" class="button">View and Manage Files</a>
+                <a href="{% url 'profile' %}" class="button">View Profile</a> <!-- 新增Profile按鈕 -->
             {% else %}
-                <li><a href="{% url 'login' %}">Login</a></li>
-                <li><a href="{% url 'register' %}">Register</a></li>
+                <a href="{% url 'login' %}" class="button">Login</a>
+                <a href="{% url 'register' %}" class="button">Register</a>
             {% endif %}
-        </ul>
-    </nav>
+        </div>
+    </div>
 
     <footer>
         <p>&copy; 2024 Cloud Application</p>
