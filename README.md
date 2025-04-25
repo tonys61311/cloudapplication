@@ -2,6 +2,10 @@
 
 This is a cloud-based file storage system built with [Django](https://www.djangoproject.com/), integrated with [AWS S3](https://aws.amazon.com/s3/) for backend storage and using a MySQL database for user and data management.
 
+## Documentation
+
+For detailed architecture, design considerations, and additional setup instructions, please refer to [CloudProject_Documentation.pdf](CloudProject_Documentation.pdf).
+
 ## Features
 
 1. **User Registration, Login, and Logout**  
@@ -14,7 +18,6 @@ This is a cloud-based file storage system built with [Django](https://www.django
    - Django Templates + CSS (in the `static` folder) to create a simple interface.
 5. **MySQL Database**  
    - Stores user information; can be configured in `settings.py`.
-
 
 ## Project Structure
 
